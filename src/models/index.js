@@ -1,7 +1,11 @@
 import mongoose from 'mongoose';
+import User from './user'; 
 
-const connectDb = () => {
+export const connectDb = () => {
     return mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
 }
 
-export default connectDb;
+export default {
+    User
+}
+
