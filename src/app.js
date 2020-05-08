@@ -6,7 +6,6 @@ import Controllers from './controllers';
 import Services from './services';
 
 
-
 const Container = require("typedi").Container;
 
 dotenv.config()
@@ -29,7 +28,6 @@ connectDb().then(() => {
 
 registerDependency()
 registerRoutes()
-
 
 const PORT = 3000
 
