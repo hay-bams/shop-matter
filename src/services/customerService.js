@@ -1,21 +1,22 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt'
 
-class UserService {
+class CustomerService {
   constructor(userModel) {
     this.userModel = userModel;
   }
 
-  async register(user) {
-    // hash the user password
-    user.password = await bcrypt.hash(user.password, 10);
+  async register(customer) {
+    // hash the customer password
+    customer.password = await bcrypt.hash(customer.password, 10);
 
-    const data = await this.userModel.create(user);
+    const data = await this.userModel.create(customer);
     const token = jwt.sign(
       {
         email: data.email,
+        username: data.username,
         firstname: data.firstname,
-        lastname: data.lastname
+        lastname: data.lastname,
       },
       process.env.SECRET
     );
@@ -28,4 +29,4 @@ class UserService {
   }
 }
 
-export default UserService;
+export default CustomerService;

@@ -2,11 +2,12 @@ class UserController {
     constructor(Container) {
         this.user = Container.get('userService')
 
-        this.signup = this.signup.bind(this)
+        this.register = this.register.bind(this)
     }
 
-    async signup(req, res) {
-        const user = await this.user.signup(req.body)
+    async register(req, res) {
+        const user = await this.user.register(req.body)
+        
         return res.status(200).json({
             user: user.data,
             token: user.token

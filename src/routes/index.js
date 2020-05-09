@@ -1,9 +1,19 @@
-import express from 'express';
+import express from "express";
 
 const Container = require("typedi").Container;
 
 const router = express.Router();
- 
-router.post('/signup', Container.get('middlewares').ensureUserDoesNotExists,  Container.get('userController').signup)
+
+router.post(
+  "/register",
+  Container.get("middleware").ensureUserDoesNotExists,
+  Container.get("userController").register
+);
+
+router.post(
+  "/register/customer",
+  Container.get("middleware").ensureCustomerDoesNotExists,
+  Container.get("customerController").register
+);
 
 export default router;

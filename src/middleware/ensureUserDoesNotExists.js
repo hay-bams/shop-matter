@@ -1,9 +1,8 @@
 const Container = require('typedi').Container;
-import Models from '../models'; // temporary solution
 
 class EnsureUserDoesNotExists {
   constructor() {
-    this.userModel = Models.User;
+    this.userModel = Container.get('Models').User
 
     this.handle = this.handle.bind(this);
   }
@@ -13,8 +12,6 @@ class EnsureUserDoesNotExists {
       email: req.body.email,
     });
 
-    console.log(foundUser)
-
     if (foundUser) {
       return res.send('user already exists')
     }
@@ -23,5 +20,4 @@ class EnsureUserDoesNotExists {
   }
 }
 
-const ensureUserDoesNotExists = new EnsureUserDoesNotExists()
-export default ensureUserDoesNotExists
+export default EnsureUserDoesNotExists

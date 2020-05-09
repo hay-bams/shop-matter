@@ -1,5 +1,7 @@
-import UserController from './userController'
+import UserController from './UserController'
+import CustomerController from './CutsomerController'
 
 export default {
-    UserController
+    UserController,
+    CustomerController
 }

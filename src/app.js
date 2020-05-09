@@ -4,9 +4,9 @@ import bodyParser from 'body-parser';
 
 import { connectDb } from './models';
 import Models from './models';
-import Controllers from './controllers';
+import Controllers from './Controllers/Index';
 import Services from './services';
-import Middlewares from './middlewares'
+import Middleware from './middleware'
 
 const Container = require('typedi').Container;
 
@@ -17,15 +17,14 @@ const app = express();
 const registerDependency = () => {
   Container.set('Models', Models)
   Container.set('userService', new Services.UserService(Models.User));
+  Container.set('customerService', new Services.CustomerService(Models.Customer));
   Container.set('userController', new Controllers.UserController(Container));
-  Container.set('middlewares', Middlewares)
+  Container.set('customerController', new Controllers.CustomerController(Container));
+  Container.set('middleware', Middleware())
 };
 
 const registerMiddleware = () => {
-  // parse application/x-www-form-urlencoded
   app.use(bodyParser.urlencoded({ extended: false }));
-
-  // parse application/json
   app.use(bodyParser.json());
 
   const router = require('./routes').default;
