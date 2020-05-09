@@ -1,40 +1,50 @@
-import express from 'express'
+import express from 'express';
 import dotenv from 'dotenv';
-import { connectDb } from './models'
+import bodyParser from 'body-parser';
+
+import { connectDb } from './models';
 import Models from './models';
 import Controllers from './controllers';
 import Services from './services';
+import Middlewares from './middlewares'
 
+const Container = require('typedi').Container;
 
-const Container = require("typedi").Container;
-
-dotenv.config()
+dotenv.config();
 
 const app = express();
 
-const registerDependency =  () => {
-     Container.set('userService', new Services.UserService(Models.User))
-     Container.set('userController', new Controllers.UserController(Container)) 
-}
+const registerDependency = () => {
+  Container.set('Models', Models)
+  Container.set('userService', new Services.UserService(Models.User));
+  Container.set('userController', new Controllers.UserController(Container));
+  Container.set('middlewares', Middlewares)
+};
 
-const registerRoutes = () => {
-    const router = require('./routes').default
-    app.use(router)
-}
+const registerMiddleware = () => {
+  // parse application/x-www-form-urlencoded
+  app.use(bodyParser.urlencoded({ extended: false }));
+
+  // parse application/json
+  app.use(bodyParser.json());
+
+  const router = require('./routes').default;
+  app.use(router);
+};
 
 connectDb().then(() => {
-    console.log('Database connected')
-})
+  console.log('Database connected');
+});
 
-registerDependency()
-registerRoutes()
+registerDependency();
+registerMiddleware();
 
-const PORT = 3000
+const PORT = 3000;
 
-app.get('/', function(req, res) {
-    return res.send('Shop Matter API')
-})
+app.get('/', function (req, res) {
+  return res.send('Shop Matter API');
+});
 
-app.listen(PORT, function() {
-    console.log(`server is listening on port ${PORT}`)
-})
+app.listen(PORT, function () {
+  console.log(`server is listening on port ${PORT}`);
+});

@@ -4,6 +4,6 @@ const Container = require("typedi").Container;
 
 const router = express.Router();
  
-router.post('/singup', Container.get('userController').signup)
+router.post('/signup', Container.get('middlewares').ensureUserDoesNotExists,  Container.get('userController').signup)
 
 export default router;
