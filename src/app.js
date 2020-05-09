@@ -2,11 +2,11 @@ import express from 'express';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 
-import { connectDb } from './models';
-import Models from './models';
+import { connectDb } from './Models/Index';
+import Models from './Models/Index';
 import Controllers from './Controllers/Index';
-import Services from './services';
-import Middleware from './middleware'
+import Services from './Services/Index';
+import Middleware from './Middleware/Index'
 
 const Container = require('typedi').Container;
 
@@ -27,7 +27,7 @@ const registerMiddleware = () => {
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
 
-  const router = require('./routes').default;
+  const router = require('./Routes/Index').default;
   app.use(router);
 };
 

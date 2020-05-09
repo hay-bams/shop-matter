@@ -1,5 +1,5 @@
-import EnsureUserDoesNotExists from "./ensureUserDoesNotExists";
-import EnsureCustomerDoesNotExists from "./ensureCustomerDoesNotExists";
+import EnsureUserDoesNotExists from "./EnsureUserDoesNotExists";
+import EnsureCustomerDoesNotExists from "./EnsureCustomerDoesNotExists";
 
 export default () => ({
   ensureUserDoesNotExists: new EnsureUserDoesNotExists().handle,

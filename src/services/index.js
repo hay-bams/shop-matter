@@ -1,5 +1,5 @@
-import UserService from './userService'
-import CustomerService from './customerService'
+import UserService from './UserService'
+import CustomerService from './CustomerService'
 
 export default {
     UserService,
