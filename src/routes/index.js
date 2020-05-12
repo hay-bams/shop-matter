@@ -16,4 +16,11 @@ router.post(
   Container.get("customerController").register
 );
 
+router.post(
+  "/login/customer",
+  Container.get("middleware").ensureCustomerExists,
+  Container.get("middleware").ensurePasswordIsValid,
+  Container.get("customerController").login
+);
+
 export default router;

@@ -1,8 +1,8 @@
-const Container = require('typedi').Container;
+const Container = require("typedi").Container;
 
 class EnsureCustomerDoesNotExists {
   constructor() {
-    this.customerModel = Container.get('Models').Customer
+    this.customerModel = Container.get("Models").Customer;
 
     this.handle = this.handle.bind(this);
   }
@@ -13,11 +13,13 @@ class EnsureCustomerDoesNotExists {
     });
 
     if (foundCustomer) {
-      return res.send('cutomer already exists')
+      return res.status(400).send({
+        message: "cutomer already exists",
+      });
     }
 
-    next()
+    next();
   }
 }
 
-export default EnsureCustomerDoesNotExists
+export default EnsureCustomerDoesNotExists;
