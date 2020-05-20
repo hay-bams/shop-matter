@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import bodyParser from 'body-parser';
 
 import { connectDb } from './Models/Index';
@@ -13,6 +14,8 @@ const Container = require('typedi').Container;
 dotenv.config();
 
 const app = express();
+
+app.use(cors())
 
 const registerDependency = () => {
   Container.set('Models', Models)
@@ -38,12 +41,10 @@ connectDb().then(() => {
 registerDependency();
 registerMiddleware();
 
-const PORT = 3000;
-
 app.get('/', function (req, res) {
   return res.send('Shop Matter API');
 });
 
-app.listen(PORT, function () {
-  console.log(`server is listening on port ${PORT}`);
+app.listen(process.env.PORT, function () {
+  console.log(`server is listening on port ${process.env.PORT}`);
 });

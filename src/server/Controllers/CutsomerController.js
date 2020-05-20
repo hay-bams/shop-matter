@@ -17,6 +17,7 @@ class CustomerController {
     async login(req, res) {
         const customer = await this.customer.login(req.body, req.foundCustomer)
         return res.status(200).json({
+            customer: customer.data,
             token: customer.token
         })
     }
