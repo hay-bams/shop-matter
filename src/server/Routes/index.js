@@ -23,4 +23,12 @@ router.post(
   Container.get("customerController").login
 );
 
+
+
+
+router.post(
+  "/products",
+  Container.get("productController").create
+);
+
 export default router;
