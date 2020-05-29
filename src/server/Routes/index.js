@@ -31,6 +31,7 @@ router.get(
 
 router.post(
   "/products",
+  Container.get("middleware").ensureProductDoesNotExists,
   Container.get("productController").create
 );
 

@@ -17,9 +17,7 @@ class ProductService {
           quantity: data.quantity
         };
     
-        return {
-            product
-        };
+        return product
       }
 }
 
