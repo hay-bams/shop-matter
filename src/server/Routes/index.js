@@ -24,7 +24,10 @@ router.post(
 );
 
 
-
+router.get(
+  "/products",
+  Container.get("productController").index
+);
 
 router.post(
   "/products",
