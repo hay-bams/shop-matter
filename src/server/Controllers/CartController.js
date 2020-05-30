@@ -2,12 +2,12 @@ class CartController {
     constructor(Container) {
         this.cart = Container.get('cartService')
 
-        // this.index = this.index.bind(this)
+        this.index = this.index.bind(this)
         this.create = this.create.bind(this)
     }
 
     async index(req, res) {
-        const products = await this.product.index(req.foundCustomer)
+        const products = await this.cart.index(req.foundCustomer)
         return res.status(200).json({
             products
         })

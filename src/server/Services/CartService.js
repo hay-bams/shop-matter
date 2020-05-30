@@ -5,9 +5,9 @@ class CartService {
   }
 
   async index(customer) {
-    const carts = await this.cartModel.findAll({
+    const carts = await this.cartModel.find({
         user: customer._id
-    });
+    }).populate('products');
     return carts;
   }
 

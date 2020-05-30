@@ -15,7 +15,6 @@ class EnsureProductRemains {
       .findOne({
         user: req.foundCustomer._id,
       })
-      .populate("products");
 
     if (!cart) {
       cart = await this.cartModel.create({
