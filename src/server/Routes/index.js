@@ -10,6 +10,7 @@ router.post(
   Container.get("userController").register
 );
 
+// Customers
 router.post(
   "/register/customer",
   Container.get("middleware").ensureCustomerDoesNotExists,
@@ -23,16 +24,21 @@ router.post(
   Container.get("customerController").login
 );
 
-
-router.get(
-  "/products",
-  Container.get("productController").index
-);
+// Products
+router.get("/products", Container.get("productController").index);
 
 router.post(
   "/products",
   Container.get("middleware").ensureProductDoesNotExists,
   Container.get("productController").create
+);
+
+// Carts
+router.post(
+  "/carts/products",
+  Container.get("middleware").ensureCustomerExists,
+  Container.get("middleware").ensureProductRemains,
+  Container.get("cartController").create
 );
 
 export default router;

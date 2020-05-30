@@ -22,9 +22,11 @@ const registerDependency = () => {
   Container.set('userService', new Services.UserService(Models.User));
   Container.set('customerService', new Services.CustomerService(Models.Customer));
   Container.set('productService', new Services.ProductService(Models.Products));
+  Container.set('cartService', new Services.CartService(Models.Carts, Models.Products));
   Container.set('userController', new Controllers.UserController(Container));
   Container.set('customerController', new Controllers.CustomerController(Container));
   Container.set('productController', new Controllers.ProductController(Container));
+  Container.set('cartController', new Controllers.CartController(Container));
   Container.set('middleware', Middleware())
 };
 
