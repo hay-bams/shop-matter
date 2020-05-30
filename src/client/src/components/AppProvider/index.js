@@ -3,7 +3,9 @@ import React, { useState, createContext, useContext } from 'react';
 export const AppContext = createContext()
 
 export const AppProvider = (props) => {
-    const [ state, setState ] = useState({})
+    const [ state, setState ] = useState({
+        products: []
+    })
     return (
         <AppContext.Provider value={ [ state, setState ]}>
             {props.children}

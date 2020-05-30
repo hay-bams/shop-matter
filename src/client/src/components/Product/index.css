@@ -1,0 +1,27 @@
+.product {
+    width: 15%;
+    height: 100%;
+    border: 2px solid gray;
+    margin-right: 10px;
+    padding-left: 20px;
+    /* text-align: center; */
+}
+
+.product-img {
+    width: 50%;
+    display: block;
+}
+
+.addtoCart {
+    /* width: 50%; */
+    margin-top: 20px;
+    padding: 10px 10px;
+    border-radius: 0;
+    margin-bottom: 20px;
+    
+}
+
+.item-details {
+    width: 65%;
+    margin: 0 auto;
+}
