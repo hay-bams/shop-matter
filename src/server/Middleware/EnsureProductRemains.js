@@ -27,10 +27,7 @@ class EnsureProductRemains {
       _id: req.body.product,
     });
 
-    const result = cart.products.filter(
-      (product) => product.id === req.body.product
-    );
-    if (product.quantity > result.length) {
+    if (product.quantity > 0) {
       req.cart = cart;
       req.product = product;
       next();

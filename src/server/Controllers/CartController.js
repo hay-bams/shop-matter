@@ -6,15 +6,20 @@ class CartController {
         this.create = this.create.bind(this)
     }
 
-    // async index(req, res) {
-    //     const products = await this.product.index()
-    //     return res.status(200).json({
-    //         products
-    //     })
-    // }
+    async index(req, res) {
+        const products = await this.product.index(req.foundCustomer)
+        return res.status(200).json({
+            products
+        })
+    }
 
     async create(req, res) {
-        const cart = await this.cart.create(req.body, req.foundCustomer, req.cart)
+        const options = {
+            customer: req.foundCustomer,
+            cart: req.cart,
+            product: req.product
+        }
+        const cart = await this.cart.create(options )
         return res.status(200).json({
            cart
         })

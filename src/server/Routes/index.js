@@ -41,4 +41,10 @@ router.post(
   Container.get("cartController").create
 );
 
+router.get(
+  "/carts",
+  Container.get("middleware").ensureCustomerExists,
+  Container.get("cartController").index
+);
+
 export default router;

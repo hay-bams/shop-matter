@@ -4,23 +4,35 @@ class CartService {
     this.productModel = productModel;
   }
 
-  async index() {
-    const carts = await this.cartModel.find();
+  async index(customer) {
+    const carts = await this.cartModel.findAll({
+        user: customer._id
+    });
     return carts;
   }
 
-  async create(item, customer, cart) {
-    const queryParams = { user: customer._id };
+  async create(requestOptions) {
+    const queryParams = { user: requestOptions.customer._id };
 
     const update = {
-      total: cart.total + 1,
+      total: requestOptions.cart.total + 1,
       $push: {
-        products: item.product,
+        products: requestOptions.product._id,
       },
     };
 
     const options = { new: true };
-    cart = await this.cartModel.findOneAndUpdate(queryParams, update, options);
+    // update the cart
+    let cart = await this.cartModel.findOneAndUpdate(queryParams, update, options);
+
+    //update the product
+    if(cart) {
+        await this.productModel.updateOne({
+           _id: requestOptions.product._id
+        }, {
+            quantity: requestOptions.product.quantity - 1
+        })
+    }
 
     return cart;
   }
