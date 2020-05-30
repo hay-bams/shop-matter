@@ -17,7 +17,7 @@ const app = express();
 
 app.use(cors())
 
-const registerDependency = () => {
+const registerDependencies = () => {
   Container.set('Models', Models)
   Container.set('userService', new Services.UserService(Models.User));
   Container.set('customerService', new Services.CustomerService(Models.Customer));
@@ -42,7 +42,7 @@ connectDb().then(() => {
   console.log('Database connected');
 });
 
-registerDependency();
+registerDependencies();
 registerMiddleware();
 
 app.get('/', function (req, res) {
