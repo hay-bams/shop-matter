@@ -16,7 +16,7 @@ class CartController {
     async create(req, res) {
         const cart = await this.cart.create(req.body, req.foundCustomer, req.cart)
         return res.status(200).json({
-            message: "Product added to cart"
+           cart
         })
     }
 }
