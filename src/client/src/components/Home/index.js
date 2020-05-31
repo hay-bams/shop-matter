@@ -5,12 +5,18 @@ import axios from "axios";
 import { useGlobalState } from "hooks/useGlobalState";
 
 export const Home = () => {
- const [state, setState] = useGlobalState()
- useEffect(() => {
-     axios.get('/products').then((products) => {
-         setState({...state, products: products.data.products})
-     }).catch((err) => console.log(err))
- }, [])
+  const [state, setState] = useGlobalState();
+  useEffect(() => {
+    Promise.all([axios.get("/products"), axios.get("/carts")])
+      .then(([products, carts]) => {
+        setState({
+          ...state,
+          products: products.data.products,
+          cart: carts.data,
+        });
+      })
+      .catch((err) => console.log(err.response.data));
+  }, []);
 
   return (
     <>

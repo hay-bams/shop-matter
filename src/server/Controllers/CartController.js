@@ -7,10 +7,8 @@ class CartController {
     }
 
     async index(req, res) {
-        const products = await this.cart.index(req.foundCustomer)
-        return res.status(200).json({
-            products
-        })
+        const carts = await this.cart.index(req.foundCustomer)
+        return res.status(200).json(carts)
     }
 
     async create(req, res) {
@@ -20,9 +18,7 @@ class CartController {
             product: req.product
         }
         const cart = await this.cart.create(options )
-        return res.status(200).json({
-           cart
-        })
+        return res.status(200).json(cart)
     }
 }
 

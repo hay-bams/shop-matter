@@ -10,7 +10,7 @@ class CustomerController {
         const customer = await this.customer.register(req.body)
         return res.status(200).json({
             customer: customer.data,
-            token: customer.token
+            token: `Bearer ${customer.token}`
         })
     }
     
@@ -18,7 +18,7 @@ class CustomerController {
         const customer = await this.customer.login(req.body, req.foundCustomer)
         return res.status(200).json({
             customer: customer.data,
-            token: customer.token
+            token: `Bearer ${customer.token}`
         })
     }
 }

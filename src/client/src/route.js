@@ -12,7 +12,8 @@ axios.defaults.baseURL = "http://localhost:3030";
 
 const auth = window.localStorage.getItem("auth");
 if (auth) {
-  axios.defaults.headers.common["Authorization"] = auth.token;
+  console.log(JSON.parse(auth))
+  axios.defaults.headers.common["Authorization"] =  JSON.parse(auth).token;
 }
 
 const Notfound = () => <h1>Not found</h1>;

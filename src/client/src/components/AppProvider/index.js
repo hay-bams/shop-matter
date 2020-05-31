@@ -4,7 +4,8 @@ export const AppContext = createContext()
 
 export const AppProvider = (props) => {
     const [ state, setState ] = useState({
-        products: []
+        products: [],
+        cart: {}
     })
     return (
         <AppContext.Provider value={ [ state, setState ]}>

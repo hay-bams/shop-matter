@@ -7,7 +7,7 @@ export const ProductList = () => {
     const [state, ] = useGlobalState()
     return (
        <div className="product-container">
-          {state.products.map((product) => <Product key={product} item={product} />) }
+          {state.products.map((product) => <Product key={product._id} item={product} />) }
        </div>
     )
 }

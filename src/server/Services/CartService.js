@@ -5,9 +5,11 @@ class CartService {
   }
 
   async index(customer) {
-    const carts = await this.cartModel.find({
-        user: customer._id
-    }).populate('products');
+    const carts = await this.cartModel
+      .findOne({
+        user: customer._id,
+      })
+      .populate("products");
     return carts;
   }
 
@@ -23,15 +25,20 @@ class CartService {
 
     const options = { new: true };
     // update the cart
-    let cart = await this.cartModel.findOneAndUpdate(queryParams, update, options);
+    let cart = await this.cartModel
+      .findOneAndUpdate(queryParams, update, options)
+      .populate("products");
 
     //update the product
-    if(cart) {
-        await this.productModel.updateOne({
-           _id: requestOptions.product._id
-        }, {
-            quantity: requestOptions.product.quantity - 1
-        })
+    if (cart) {
+      await this.productModel.updateOne(
+        {
+          _id: requestOptions.product._id,
+        },
+        {
+          quantity: requestOptions.product.quantity - 1,
+        }
+      );
     }
 
     return cart;
