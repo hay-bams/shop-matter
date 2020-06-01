@@ -5,6 +5,7 @@ import axios from "axios";
 import { useGlobalState } from "hooks/useGlobalState";
 
 export const Home = () => {
+    console.log('wroking')
   const [state, setState] = useGlobalState();
   useEffect(() => {
     Promise.all([axios.get("/products"), axios.get("/carts")])
